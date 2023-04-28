@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project list</title>
+</head>
+<body>
+<h1>Proyectos:</h1>
+<ul>
+    <li th:each="Proyecto : ${proyectos}">
+        <span th:text="${Proyecto.nombre}"></span> -
+        <span th:text="${Proyecto.descripcion}"></span>
+        <span th:text="${Proyecto.creador}"></span>
+    </li>
+</ul>
+<h2>Agregar Proyecto:</h2>
+<form method="post" action="#" th:action="@{/add}" th:object="${proyecto}">
+    <div>
+        <label>Nombre:</label>
+        <input type="text" name="nombre" />
+    </div>
+    <div>
+        <label>Descripción:</label>
+        <input type="text" name="descripcion" />
+    </div>
+    <div>
+        <label>Creador:</label>
+        <input type="text" name="creador" />
+    </div>
+
+    <button type="submit">Guardar</button>
+</form>
+</body>
+</html>
