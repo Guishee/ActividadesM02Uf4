@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista y formulario de alumnos.</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="fragmentos/navbar :: navbar"></div>
+
+<h1>Lista de Alumnos</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>DNI</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="alumno : ${alumnos}">
+        <td th:text="${alumno.nombre}"></td>
+        <td th:text="${alumno.correo}"></td>
+        <td th:text="${alumno.dniNumero + alumno.dniLetra}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Añadir Alumno</h2>
+
+<form th:object="${nuevoAlumno}" method="post">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" required><br>
+
+    <label for="correo">Correo:</label>
+    <input type="email" id="correo" name="correo" th:field="*{correo}" required><br>
+
+    <label for="dniNumero">DNI número:</label>
+    <input type="text" id="dniNumero" name="dniNumero" th:field="*{dniNumero}" required><br>
+
+    <label for="dniLetra">DNI letra:</label>
+    <select id="dniLetra" name="dniLetra" th:field="*{dniLetra}">
+        <option value="A" th:text="'A'" th:selected="${nuevoAlumno.dniLetra == 'A'}"></option>
+        <option value="B" th:text="'B'" th:selected="${nuevoAlumno.dniLetra == 'B'}"></option>
+        <option value="C" th:text="'C'" th:selected="${nuevoAlumno.dniLetra == 'C'}"></option>
+        <option value="D" th:text="'D'" th:selected="${nuevoAlumno.dniLetra == 'D'}"></option>
+    </select><br>
+
+    <button type="submit">Añadir</button>
+</form>
+</body>
+</html>
+
